@@ -3,24 +3,24 @@ import Card from "../components/Card/Card";
 import InputGroup from "../components/Filter/category/InputGroup";
 
 const Episodes = () => {
-  let [results, setResults] = React.useState([]);
-  let [info, setInfo] = useState([]);
-  let { air_date, name } = info;
-  let [id, setID] = useState(1);
+  const [results, setResults] = React.useState([]);
+  const [info, setInfo] = useState([]);
+  const { air_date, name } = info;
+  const [id, setID] = useState(1);
 
-  let api = `https://rickandmortyapi.com/api/episode/${id}`;
+  const api = `https://rickandmortyapi.com/api/episode/${id}`;
 
   useEffect(() => {
     (async function () {
-      let data = await fetch(api).then((res) => res.json());
+      const data = await fetch(api).then((res) => res.json());
       setInfo(data);
 
-      let a = await Promise.all(
+      const response = await Promise.all(
         data.characters.map((x) => {
           return fetch(x).then((res) => res.json());
         })
       );
-      setResults(a);
+      setResults(response);
     })();
   }, [api]);
 
